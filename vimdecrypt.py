@@ -323,7 +323,7 @@ def password_cracker(data, args):
     data = data[:1024]
     pwgen = dictionary_words(args.dictionary, args) if args.dictionary else bruteforce_generator(args)
 
-    t0 = time.clock()
+    t0 = time.perf_counter()
     count = 0
     for password in pwgen:
         result = decryptfile(data, password, args)
@@ -335,7 +335,7 @@ def password_cracker(data, args):
             print("---------")
         count += 1
         if (count%1000)==0:
-            print("%8d passwords tried, %d passwords per second" % (count, count/(time.clock()-t0)))
+            print("%8d passwords tried, %d passwords per second" % (count, count/(time.perf_counter()-t0)))
 
 
 def main():
